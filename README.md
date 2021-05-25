@@ -28,12 +28,11 @@
 | product_name    | string     | null: false                   |
 | category_id     | integer    | null: false                   |
 | price           | integer    | null: false                   |
-| brand           | string     | null: false                   |
 | description     | text       | null: false                   |
 | status_id       | integer    | null: false                   |
 | shipping_id     | integer    | null: false                   |
 | send_day_id     | integer    | null: false                   |
-| Prefecture_id   | integer    | null: false                   |
+| prefecture_id   | integer    | null: false                   |
 | user            | references | null: false, foreign_key: true|
 
 
@@ -82,6 +81,6 @@ _ belongs_to :product
 
 ### Association
 
-- has_many :addresses
+- has_one :addresses
 - belongs_to :user
 - belongs_to :product
