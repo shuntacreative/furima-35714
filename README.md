@@ -19,8 +19,7 @@
 
 - has_many :products
 - has_many :comments
-- has_many :addresses
-- has-many :credits
+- has_many :purchase_user
 
 ## products テーブル
 
@@ -31,18 +30,17 @@
 | price           | integer    | null: false                   |
 | brand           | string     | null: false                   |
 | description     | text       | null: false                   |
-| comment         | text       | null: false                   |
 | status_id       | integer    | null: false                   |
 | shipping_id     | integer    | null: false                   |
 | send_day_id     | integer    | null: false                   |
-| shipping_source | string     | null: false                   |
+| Prefecture_id   | integer    | null: false                   |
 | user            | references | null: false, foreign_key: true|
-| credit          | references |                               |
-| address         | references |                               |
+
 
 ### Association
 
 - has_many :comments
+- has_many :Purchase_user
 - belongs_to :user
 
 
@@ -64,13 +62,13 @@ _ belongs_to :product
 
 | Column           | Type       | Options                        |
 | -------------    | ------     | -----------                    |
-| post_code        | integer    | null: false                    |
-| prefecture       | string     | null: false                    |
+| post_code        | string     | null: false                    |
+| prefecture_id    | integer    | null: false                    |
 | city             | string     | null: false                    | 
-| flat number      | integer    | null: false                    | 
+| flat_number      | string     | null: false                    | 
 | apartment        | string     |                                |
-| phone number     | integer    | null: false                    |
-| user             | references | null: false, foreign_key: true |
+| phone_number     | string     | null: false                    |
+| purchase_user    | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
@@ -84,5 +82,6 @@ _ belongs_to :product
 
 ### Association
 
+- has_many :addresses
 - belongs_to :user
 - belongs_to :product
