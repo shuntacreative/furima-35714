@@ -19,7 +19,7 @@
 
 - has_many :products
 - has_many :comments
-- has_many :purchase_user
+- has_many :purchase_users
 
 ## products テーブル
 
@@ -39,7 +39,7 @@
 ### Association
 
 - has_many :comments
-- has_many :Purchase_user
+- has_many :purchase_users
 - belongs_to :user
 
 
@@ -70,7 +70,7 @@ _ belongs_to :product
 | purchase_user    | references | null: false, foreign_key: true |
 
 ### Association
-- belongs_to :user
+- belongs_to :purchase_user
 
 ## Purchase_user テーブル
 
@@ -81,6 +81,6 @@ _ belongs_to :product
 
 ### Association
 
-- has_one :addresses
+- has_one :address
 - belongs_to :user
 - belongs_to :product
