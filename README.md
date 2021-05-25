@@ -39,7 +39,7 @@
 ### Association
 
 - has_many :comments
-- has_many :purchase_users
+- has_one :purchase_user
 - belongs_to :user
 
 
