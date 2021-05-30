@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+
+  has_many :products
   
   
   
@@ -29,3 +31,4 @@ class User < ApplicationRecord
   
             
 end
+
