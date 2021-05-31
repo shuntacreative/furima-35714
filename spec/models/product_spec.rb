@@ -43,6 +43,11 @@ RSpec.describe Product, type: :model do
        expect(@product).to be_valid
       end
 
+      it "status_idが２以上ならできる" do
+        @product.status_id = 2
+        expect(@product).to be_valid
+       end
+
       it "shipping_idが２以上ならできる" do
        @product.shipping_id = 2
        expect(@product).to be_valid
@@ -100,6 +105,12 @@ RSpec.describe Product, type: :model do
         @product.valid?
         expect(@product.errors.full_messages).to include("Category must be other than 1")
       end
+
+      it "status_idが1の場合は出品できないこと" do
+        @product.status_id = 1
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Status must be other than 1")
+      end
    
       
       it "shipping_idが1の場合は出品できないこと" do
@@ -130,14 +141,14 @@ RSpec.describe Product, type: :model do
 
 
       it "priceが299以下だと出品できないこと" do
-        @product.price = "299"
+        @product.price = 299
         @product.valid?
         expect(@product.errors.full_messages).to include("Price must be greater than or equal to 300")
       end
    
 
       it "priceが10000000だと出品できないこと" do
-        @product.price = "10000000"
+        @product.price = 10000000
         @product.valid?
         expect(@product.errors.full_messages).to include("Price must be less than or equal to 9999999")
       end 
