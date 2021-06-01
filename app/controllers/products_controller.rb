@@ -33,6 +33,8 @@ class ProductsController < ApplicationController
 
   def update
     @product = Product.find(params[:id])
+    unless user_signed_in? && @product.user_id == current_user.id
+      redirect_to root_path
     if @product.update(product_params)
        redirect_to root_path
     else
