@@ -35,6 +35,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     unless user_signed_in? && @product.user_id == current_user.id
       redirect_to root_path
+    end
     if @product.update(product_params)
        redirect_to root_path
     else
