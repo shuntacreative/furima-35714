@@ -1,0 +1,2 @@
+module PurchaseUserHelper
+end
