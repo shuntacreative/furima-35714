@@ -1,4 +1,5 @@
 class PurchaseUserController < ApplicationController
+
   def index
     @purchase_user_address = PurchaseUserAddress.new
     @product = Product.find(params[:product_id])
@@ -18,7 +19,6 @@ class PurchaseUserController < ApplicationController
   end
 
   private
-
 
   def purchase_user_address_params
     params.require(:purchase_user_address).permit(:post_code, :price, :prefecture_id, :city, :flat_number, :apartment, :phone_number, :user, :product).merge(user_id: current_user.id, product_id: params[:product_id], token: params[:token])

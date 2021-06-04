@@ -2,6 +2,7 @@ class Product < ApplicationRecord
   
   belongs_to :user
   has_one_attached :image
+  has_one :purchase_user
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
