@@ -1,15 +1,16 @@
 class PurchaseUserController < ApplicationController
   before_action :authenticate_user!
   before_action :sold_out_product, only: [:index]
+  before_action :hello_params
 
   def index
     @purchase_user_address = PurchaseUserAddress.new
-    @product = Product.find(params[:product_id])
+    
   end
 
   def create
     @purchase_user_address = PurchaseUserAddress.new(purchase_user_address_params)
-    @product = Product.find(params[:product_id])
+    
 
     if @purchase_user_address.valid?
       pay_item
@@ -22,10 +23,13 @@ class PurchaseUserController < ApplicationController
 
   private
 
+  def hello_params
+    @product = Product.find(params[:product_id]
+  end
+
   def sold_out_product
     
-    @product = Product.find(params[:product_id])
-    redirect_to root_path if @product.purchase_user.present?
+    redirect_to root_path if !@product.purchase_user.present? && @product.user.id == current_user.id
    end
 
   def purchase_user_address_params

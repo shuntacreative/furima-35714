@@ -19,8 +19,8 @@ RSpec.describe PurchaseUserAddress, type: :model do
         expect(@purchase_user_address).to be_valid
        end
   
-      it 'flat_numberは空でも保存できること' do
-        @purchase_user_address.flat_number = ''
+      it 'apartmentは空でも保存できること' do
+        @purchase_user_address.apartment = ''
         expect(@purchase_user_address).to be_valid
       end
     end  
@@ -86,10 +86,16 @@ RSpec.describe PurchaseUserAddress, type: :model do
         expect(@purchase_user_address.errors.full_messages).to include("Phone number is invalid")
       end
 
-      it 'apartmentが空ではできないこと' do
-        @purchase_user_address.apartment = ''
+      it "電話番号は英数混合では保存できない" do
+        @purchase_user_address.phone_number = '12345612qwer'
         @purchase_user_address.valid?
-        expect(@purchase_user_address.errors.full_messages).to include("Apartment can't be blank") 
+        expect(@purchase_user_address.errors.full_messages).to include("Phone number is invalid")
+      end
+
+      it 'flat_numberが空ではできないこと' do
+        @purchase_user_address.flat_number = ''
+        @purchase_user_address.valid?
+        expect(@purchase_user_address.errors.full_messages).to include("Flat number can't be blank") 
       end 
 
 
@@ -97,6 +103,12 @@ RSpec.describe PurchaseUserAddress, type: :model do
         @purchase_user_address.user_id = nil
         @purchase_user_address.valid?
         expect(@purchase_user_address.errors.full_messages).to include("User can't be blank")
+      end
+
+      it 'productが紐づいていないとできないこと' do
+        @purchase_user_address.product_id = nil
+        @purchase_user_address.valid?
+        expect(@purchase_user_address.errors.full_messages).to include("Product can't be blank")
       end
     end
   end
