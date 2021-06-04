@@ -98,6 +98,12 @@ RSpec.describe PurchaseUserAddress, type: :model do
         expect(@purchase_user_address.errors.full_messages).to include("Flat number can't be blank") 
       end 
 
+      it 'cityが空ではできないこと' do
+        @purchase_user_address.city = ''
+        @purchase_user_address.valid?
+        expect(@purchase_user_address.errors.full_messages).to include("City can't be blank") 
+      end 
+
 
       it 'userが紐付いていないと保存できないこと' do
         @purchase_user_address.user_id = nil

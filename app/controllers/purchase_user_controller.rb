@@ -1,7 +1,8 @@
 class PurchaseUserController < ApplicationController
   before_action :authenticate_user!
-  before_action :sold_out_product, only: [:index]
   before_action :hello_params
+  before_action :sold_out_product, only: [:index]
+  
 
   def index
     @purchase_user_address = PurchaseUserAddress.new
@@ -29,7 +30,7 @@ class PurchaseUserController < ApplicationController
 
   def sold_out_product
     
-    redirect_to root_path if !@product.purchase_user.present? && @product.user.id == current_user.id
+    redirect_to root_path if @product.purchase_user.present? && @product.user.id == current_user.id
    end
 
   def purchase_user_address_params
