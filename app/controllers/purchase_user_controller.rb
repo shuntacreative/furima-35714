@@ -1,4 +1,6 @@
 class PurchaseUserController < ApplicationController
+  before_action :authenticate_user!
+  before_action :sold_out_product, only: [:index]
 
   def index
     @purchase_user_address = PurchaseUserAddress.new
@@ -19,6 +21,12 @@ class PurchaseUserController < ApplicationController
   end
 
   private
+
+  def sold_out_product
+    
+    @product = Product.find(params[:product_id])
+    redirect_to root_path if @product.purchase_user.present?
+   end
 
   def purchase_user_address_params
     params.require(:purchase_user_address).permit(:post_code, :price, :prefecture_id, :city, :flat_number, :apartment, :phone_number, :user, :product).merge(user_id: current_user.id, product_id: params[:product_id], token: params[:token])
