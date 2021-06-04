@@ -25,7 +25,7 @@ class PurchaseUserController < ApplicationController
   private
 
   def hello_params
-    @product = Product.find(params[:product_id]
+    @product = Product.find(params[:product_id])
   end
 
   def sold_out_product
