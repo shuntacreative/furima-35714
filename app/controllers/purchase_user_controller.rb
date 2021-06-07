@@ -30,7 +30,7 @@ class PurchaseUserController < ApplicationController
 
   def sold_out_product
     
-    redirect_to root_path if @product.purchase_user.present? && @product.user.id == current_user.id
+    redirect_to root_path if @product.purchase_user.present? || @product.user.id == current_user.id
    end
 
   def purchase_user_address_params
